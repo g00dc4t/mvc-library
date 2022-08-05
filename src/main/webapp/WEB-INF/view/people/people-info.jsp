@@ -6,7 +6,7 @@
 <h2>People info</h2>
 <br>
 
-<form:form action="/library/people/save" modelAttribute="people">
+<form:form action="/library/people/save" modelAttribute="person">
 
     <form:hidden path="id"/>
 

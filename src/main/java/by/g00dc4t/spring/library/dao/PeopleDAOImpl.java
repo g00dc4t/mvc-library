@@ -1,21 +1,21 @@
 package by.g00dc4t.spring.library.dao;
 
-import by.g00dc4t.spring.library.entity.People;
+import by.g00dc4t.spring.library.entity.Person;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class PeopleDAOImpl extends LibraryGenericDAO<People> {
+public class PeopleDAOImpl extends LibraryGenericDAO<Person> {
     @Override
-    protected Query<People> getQueryGetAll() {
-        return sessionFactory.getCurrentSession().createQuery("from People", People.class);
+    protected Query<Person> getQueryGetAll() {
+        return sessionFactory.getCurrentSession().createQuery("from Person", Person.class);
     }
 
     @Override
-    protected Query<People> getQueryDelete() {
+    protected Query<Person> getQueryDelete() {
         Session session = sessionFactory.getCurrentSession();
-        Query<People> query = session.createQuery("delete from People where id =:peopleId");
+        Query<Person> query = session.createQuery("delete from Person where id =:peopleId");
         return query;
     }
 
@@ -25,7 +25,7 @@ public class PeopleDAOImpl extends LibraryGenericDAO<People> {
     }
 
     @Override
-    protected Class<People> getEntityClass() {
-        return People.class;
+    protected Class<Person> getEntityClass() {
+        return Person.class;
     }
 }

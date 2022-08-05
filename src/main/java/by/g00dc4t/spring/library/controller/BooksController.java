@@ -1,9 +1,9 @@
 package by.g00dc4t.spring.library.controller;
 
 import by.g00dc4t.spring.library.entity.Book;
-import by.g00dc4t.spring.library.entity.People;
+import by.g00dc4t.spring.library.entity.Person;
 import by.g00dc4t.spring.library.service.BooksService;
-import by.g00dc4t.spring.library.service.PeopleService;
+import by.g00dc4t.spring.library.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +19,7 @@ public class BooksController {
     @Autowired
     private BooksService booksService;
     @Autowired
-    private PeopleService peopleService;
+    private PersonService peopleService;
 
     @RequestMapping("")
     public String showAllBooks(Model model) {
@@ -50,8 +50,8 @@ public class BooksController {
     public String showBook(@PathVariable("id") int id, Model model) {
         Book book = booksService.getBook(id);
         model.addAttribute("book", book);
-        model.addAttribute("people", new People());
-        model.addAttribute("peoples", peopleService.getAllPeople());
+        model.addAttribute("person", new Person());
+        model.addAttribute("peoples", peopleService.getAllPersons());
         return "book/book-view";
     }
 
@@ -62,24 +62,24 @@ public class BooksController {
     }
 
     @RequestMapping("/{id}/assign")
-    public String assignBook(@ModelAttribute("people") People people, @PathVariable("id") int bookId,
+    public String assignBook(@ModelAttribute("person") Person person, @PathVariable("id") int bookId,
                              Model model, BindingResult bindingResult) {
         Book book = booksService.getBook(bookId);
-        book.setPeople(peopleService.getPeople(people.getId()));
+        book.setPerson(peopleService.getPerson(person.getId()));
         booksService.saveBook(book);
         model.addAttribute("book", book);
-        model.addAttribute("peoples", peopleService.getAllPeople());
+        model.addAttribute("peoples", peopleService.getAllPersons());
         return "book/book-view";
     }
 
     @RequestMapping("/{id}/release")
     public String releaseBook(@PathVariable("id") int id, Model model) {
         Book book = booksService.getBook(id);
-        book.setPeople(null);
+        book.setPerson(null);
         booksService.saveBook(book);
         model.addAttribute("book", book);
-        model.addAttribute("people", new People());
-        model.addAttribute("peoples", peopleService.getAllPeople());
+        model.addAttribute("person", new Person());
+        model.addAttribute("peoples", peopleService.getAllPersons());
         return "book/book-view";
     }
 

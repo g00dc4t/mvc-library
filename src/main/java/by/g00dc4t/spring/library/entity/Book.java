@@ -22,7 +22,7 @@ public class Book {
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
             CascadeType.REFRESH})
     @JoinColumn(name = "people_id")
-    private People people;
+    private Person person;
 
     public Book() {
     }
@@ -65,12 +65,12 @@ public class Book {
         this.year = year;
     }
 
-    public People getPeople() {
-        return people;
+    public Person getPerson() {
+        return person;
     }
 
-    public void setPeople(People people) {
-        this.people = people;
+    public void setPerson(Person person) {
+        this.person = person;
     }
 
     @Override
@@ -80,7 +80,7 @@ public class Book {
                 ", name='" + name + '\'' +
                 ", author='" + author + '\'' +
                 ", year=" + year +
-                ", people=" + people +
+                ", person=" + person +
                 '}';
     }
 }

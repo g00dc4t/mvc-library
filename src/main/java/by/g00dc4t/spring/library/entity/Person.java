@@ -9,7 +9,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "people")
-public class People {
+public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -26,7 +26,7 @@ public class People {
 
     @OneToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
             CascadeType.REFRESH},
-            mappedBy = ("people"),
+            mappedBy = ("person"),
             fetch = FetchType.LAZY)
     @Fetch(FetchMode.JOIN)
     private List<Book> books;
@@ -35,10 +35,10 @@ public class People {
         books = new ArrayList<Book>();
     }
 
-    public People() {
+    public Person() {
     }
 
-    public People(String name, String surName, int year) {
+    public Person(String name, String surName, int year) {
         this.name = name;
         this.surName = surName;
         this.year = year;
