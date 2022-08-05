@@ -27,5 +27,9 @@
 <input type="button" value="Delete"
        onclick="window.location.href='../people/${people.id}/delete'"/>
 
+<br>
+<br>
+<a href="/library/people">back to all people</a>
+
 </body>
 </html>

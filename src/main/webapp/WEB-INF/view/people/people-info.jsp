@@ -19,5 +19,9 @@
     <input type="submit" value="OK">
 </form:form>
 
+<br>
+<br>
+<a href="/library/people">back to all people</a>
+
 </body>
 </html>

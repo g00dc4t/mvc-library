@@ -1,6 +1,6 @@
 package by.g00dc4t.spring.library.service;
 
-import by.g00dc4t.spring.library.dao.PeopleDAO;
+import by.g00dc4t.spring.library.dao.LibraryGenericDAO;
 import by.g00dc4t.spring.library.entity.People;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,25 +11,25 @@ import java.util.List;
 @Service
 public class PeopleServiceImpl implements PeopleService {
     @Autowired
-    private PeopleDAO peopleDAO;
+    private LibraryGenericDAO<People> peopleDAO;
 
     @Transactional
     public List<People> getAllPeople() {
-        return peopleDAO.getAllPeople();
+        return peopleDAO.getAll();
     }
 
     @Transactional
     public void savePeople(People people) {
-        peopleDAO.savePeople(people);
+        peopleDAO.save(people);
     }
 
     @Transactional
     public People getPeople(int id) {
-        return peopleDAO.getPeople(id);
+        return peopleDAO.get(id);
     }
 
     @Transactional
     public void deletePeople(int id) {
-        peopleDAO.deletePeople(id);
+        peopleDAO.delete(id);
     }
 }

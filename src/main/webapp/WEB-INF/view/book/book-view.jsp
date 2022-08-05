@@ -42,5 +42,9 @@
 <input type="button" value="Delete"
        onclick="window.location.href='../books/${book.id}/delete'"/>
 
+<br>
+<br>
+<a href="/library/books">back to all books</a>
+
 </body>
 </html>

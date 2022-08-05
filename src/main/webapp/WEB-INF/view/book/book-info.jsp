@@ -21,5 +21,9 @@
     </form:form>
 </div>
 
+<br>
+<br>
+<a href="/library/books">back to all books</a>
+
 </body>
 </html>
