@@ -1,6 +1,7 @@
 package by.g00dc4t.spring.library.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 @Entity
 @Table(name = "books")
@@ -11,12 +12,16 @@ public class Book {
     private int id;
 
     @Column(name = "name")
+    @NotBlank(message = "name is required field")
     private String name;
 
     @Column(name = "author")
+    @NotBlank(message = "author is required field")
     private String author;
 
     @Column(name = "year")
+    @Min(value = 1, message = "must be more than 1")
+    @Max(value = 3000, message = "must be less than 3000")
     private int year;
 
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,

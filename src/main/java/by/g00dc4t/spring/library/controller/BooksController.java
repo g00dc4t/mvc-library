@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.validation.Valid;
+
 
 @Controller
 @RequestMapping("/books")
@@ -41,9 +43,15 @@ public class BooksController {
     }
 
     @RequestMapping("/save")
-    public String saveBook(@ModelAttribute("book") Book book) {
-        booksService.saveBook(book);
-        return "redirect:/books";
+    public String saveBook(@Valid @ModelAttribute("book") Book book, BindingResult bindingResult) {
+        String result;
+        if (bindingResult.hasErrors()) {
+            result = "book/book-info";
+        } else {
+            booksService.saveBook(book);
+            result = "redirect:/books";
+        }
+        return result;
     }
 
     @RequestMapping("/{id}")
@@ -63,7 +71,7 @@ public class BooksController {
 
     @RequestMapping("/{id}/assign")
     public String assignBook(@ModelAttribute("person") Person person, @PathVariable("id") int bookId,
-                             Model model, BindingResult bindingResult) {
+                             Model model) {
         Book book = booksService.getBook(bookId);
         book.setPerson(peopleService.getPerson(person.getId()));
         booksService.saveBook(book);

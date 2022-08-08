@@ -4,6 +4,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,12 +17,16 @@ public class Person {
     private int id;
 
     @Column(name = "name")
+    @Pattern(regexp = "[a-zA-Z]+", message = "name must use letters")
     private String name;
 
     @Column(name = "surname")
+    @Pattern(regexp = "[a-zA-Z]+", message = "surname must use letters")
     private String surName;
 
     @Column(name = "year")
+    @Min(value = 18, message = "must be more than 17")
+    @Max(value = 100, message = "must be less than 101")
     private int year;
 
     @OneToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
