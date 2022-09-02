@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BooksServiceImpl implements BooksService {
@@ -25,7 +26,12 @@ public class BooksServiceImpl implements BooksService {
 
     @Transactional
     public Book getBook(int id) {
-        return booksDAO.get(id);
+        Book result = null;
+        Optional<Book> optionalBook = booksDAO.get(id);
+        if (optionalBook.isPresent()) {
+            result = optionalBook.get();
+        }
+        return result;
     }
 
     @Transactional

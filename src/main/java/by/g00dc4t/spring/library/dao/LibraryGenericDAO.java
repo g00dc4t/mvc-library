@@ -6,6 +6,7 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.Optional;
 
 public abstract class LibraryGenericDAO<T> {
     @Autowired
@@ -29,9 +30,9 @@ public abstract class LibraryGenericDAO<T> {
         session.saveOrUpdate(entity);
     }
 
-    public T get(int id) {
+    public Optional<T> get(int id) {
         Session session = sessionFactory.getCurrentSession();
-        return session.get(getEntityClass(), id);
+        return Optional.of(session.get(getEntityClass(), id));
     }
 
     public void delete(int id) {
