@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Library</title>
+</head>
+<body>
+
+<h3>Book info</h3>
+<br>
+
+<div>
+    <form th:action="@{/books/save}" th:object="${book}">
+        <table>
+            <tr>
+                <td><input th:type="hidden" th:field="*{id}"></td>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td><input th:field="*{name}"/></td>
+                <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</td>
+            </tr>
+            <tr>
+                <td>Author</td>
+                <td><input th:field="*{author}"/></td>
+                <td th:if="${#fields.hasErrors('author')}" th:errors="*{author}">Author Error</td>
+            </tr>
+            <tr>
+                <td>Year</td>
+                <td><input th:field="*{year}"/></td>
+                <td th:if="${#fields.hasErrors('year')}" th:errors="*{year}">Author Error</td>
+            </tr>
+            <tr>
+                <td>
+                    <button type="submit">OK</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+<br>
+<br>
+<a href="/library/books">back to all books</a>
+
+</body>
+</html>

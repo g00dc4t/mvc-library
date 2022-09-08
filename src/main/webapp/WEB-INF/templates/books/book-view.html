@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Library</title>
+</head>
+<body>
+
+<h4>Book</h4>
+
+<p>[[${book.name}]], [[${book.author}]], [[${book.year}]]</p>
+
+<hr>
+
+<div th:with="prevUrl='/books/' + ${book.id}">
+
+    <th:block th:if="${book.person == null}">
+        <p>This book isn't taken</p>
+        <form th:action="@{${prevUrl} + '/assign'}" th:object="${person}">
+            <tr>
+                <td>Choose people</td>
+                <td>
+                    <select th:field="*{id}">
+                        <option th:each="p : ${people}" th:value="${p.id}" th:text="${p}">
+                        </option>
+                    </select>
+                </td>
+            </tr>
+            <input type="submit" value="Assign">
+        </form>
+    </th:block>
+
+    <th:block th:if="${book.person != null}">
+        <p>[[${book.person}]] has now this book</p>
+        <input type="button" value="Release"
+               th:onclick="|window.location.href='@{${prevUrl} + '/release'}'|"/>
+    </th:block>
+    <hr>
+    <input type="button" value="Update"
+           th:onclick="|window.location.href='@{${prevUrl} + '/edit'}'|"/>
+    <br>
+    <br>
+    <input type="button" value="Delete"
+           th:onclick="|window.location.href='@{${prevUrl} + '/delete'}'|"/>
+    <br>
+    <br>
+    <a href="/library/books">back to all books</a>
+</div>
+</body>
+</html>

@@ -28,7 +28,7 @@ public class PeopleController {
     @RequestMapping("/new")
     public String addNewPeople(Model model) {
         model.addAttribute("person", new Person());
-        return "people/people-info";
+        return "people/person-info";
     }
 
     @RequestMapping("/save")
@@ -36,7 +36,7 @@ public class PeopleController {
                              BindingResult bindingResult) {
         String result;
         if (bindingResult.hasErrors()) {
-            result = "people/people-info";
+            result = "people/person-info";
         } else {
             peopleService.savePerson(person);
             result = "redirect:/people";
@@ -48,14 +48,14 @@ public class PeopleController {
     public String showPeople(@PathVariable("id") int id, Model model) {
         Person people = peopleService.getPerson(id);
         model.addAttribute("people", people);
-        return "people/people-view";
+        return "people/person-view";
     }
 
     @RequestMapping("/{id}/edit")
     public String updatePeople(@PathVariable("id") int id, Model model) {
         Person person = peopleService.getPerson(id);
         model.addAttribute("person", person);
-        return "people/people-info";
+        return "people/person-info";
     }
 
     @RequestMapping("/{id}/delete")

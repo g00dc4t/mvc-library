@@ -20,7 +20,7 @@ public class Book {
     private String author;
 
     @Column(name = "year")
-    @Min(value = 1, message = "must be more than 1")
+    @Min(value = 1, message = "must be more than 0")
     @Max(value = 3000, message = "must be less than 3000")
     private int year;
 

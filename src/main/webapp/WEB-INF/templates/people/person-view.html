@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Library</title>
+</head>
+<body>
+<h4>Person</h4>
+<p>[[${people.name}]], [[${people.surName}]], [[${people.year}]]</p>
+<hr>
+<div th:with="booksNumber=${people.books.size()}">
+    <th:block th:if="${booksNumber == 0}">
+        <p>Hasn't taken books yet</p>
+    </th:block>
+    <th:block th:if="${booksNumber > 0}">
+        <p>Books:</p>
+        <table>
+            <tr th:each="book : ${people.books}">
+                <td>[[${book.name}]], [[${book.author}]], [[${book.year}]]</td>
+            </tr>
+        </table>
+    </th:block>
+</div>
+<hr>
+<div th:with="prevUrl='/people/' + ${people.id}">
+    <input type="button" value="Update"
+           th:onclick="|window.location.href='@{${prevUrl} + '/edit'}'|"/>
+    <br>
+    <br>
+    <input type="button" value="Delete"
+           th:onclick="|window.location.href='@{${prevUrl} + '/delete'}'|"/>
+</div>
+<br>
+<br>
+<a href="/library/people">back to all people</a>
+</body>
+</html>

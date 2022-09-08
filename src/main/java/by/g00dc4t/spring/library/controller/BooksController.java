@@ -26,20 +26,20 @@ public class BooksController {
     @RequestMapping("")
     public String showAllBooks(Model model) {
         model.addAttribute("books", booksService.getAllBooks());
-        return "book/all-books";
+        return "books/all-books";
     }
 
     @RequestMapping("/new")
     public String addBook(Model model) {
         model.addAttribute("book", new Book());
-        return "book/book-info";
+        return "books/book-info";
     }
 
     @RequestMapping("/{id}/edit")
     public String updateBook(@PathVariable("id") int id, Model model) {
         Book book = booksService.getBook(id);
         model.addAttribute("book", book);
-        return "book/book-info";
+        return "books/book-info";
     }
 
     @RequestMapping("/save")
@@ -59,8 +59,8 @@ public class BooksController {
         Book book = booksService.getBook(id);
         model.addAttribute("book", book);
         model.addAttribute("person", new Person());
-        model.addAttribute("peoples", peopleService.getAllPersons());
-        return "book/book-view";
+        model.addAttribute("people", peopleService.getAllPersons());
+        return "books/book-view";
     }
 
     @RequestMapping("/{id}/delete")
@@ -76,8 +76,8 @@ public class BooksController {
         book.setPerson(peopleService.getPerson(person.getId()));
         booksService.saveBook(book);
         model.addAttribute("book", book);
-        model.addAttribute("peoples", peopleService.getAllPersons());
-        return "book/book-view";
+        model.addAttribute("people", peopleService.getAllPersons());
+        return "books/book-view";
     }
 
     @RequestMapping("/{id}/release")
@@ -87,8 +87,8 @@ public class BooksController {
         booksService.saveBook(book);
         model.addAttribute("book", book);
         model.addAttribute("person", new Person());
-        model.addAttribute("peoples", peopleService.getAllPersons());
-        return "book/book-view";
+        model.addAttribute("people", peopleService.getAllPersons());
+        return "books/book-view";
     }
 
 }
