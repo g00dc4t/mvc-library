@@ -52,7 +52,7 @@ public class BooksController {
     }
 
     @RequestMapping("/save")
-    public String saveBook(@Valid @ModelAttribute(BOOKS_NAME) Book book,
+    public String saveBook(@Valid @ModelAttribute(BOOK_NAME) Book book,
                            BindingResult bindingResult) {
         String result;
         if (bindingResult.hasErrors()) {
@@ -85,7 +85,7 @@ public class BooksController {
         Book book = booksService.getBook(bookId);
         book.setPerson(peopleService.getPerson(person.getId()));
         booksService.saveBook(book);
-        model.addAttribute(BOOKS_NAME, book);
+        model.addAttribute(BOOK_NAME, book);
         model.addAttribute(PEOPLE_NAME, peopleService.getAllPersons());
         return BOOK_VIEW_URL;
     }
