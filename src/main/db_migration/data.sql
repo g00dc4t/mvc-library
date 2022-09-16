@@ -1,4 +1,10 @@
-create table people
+CREATE USER 'bestuser'@'localhost' IDENTIFIED BY 'bestuser';
+GRANT ALL PRIVILEGES ON * . * TO 'bestuser'@'localhost';
+
+CREATE SCHEMA my_db;
+
+USE my_db;
+CREATE TABLE people
 (
     id      int auto_increment
         primary key,
@@ -7,8 +13,7 @@ create table people
     year    int         null
 )
     engine = InnoDB;
-
-create table books
+CREATE TABLE books
 (
     id        int auto_increment
         primary key,

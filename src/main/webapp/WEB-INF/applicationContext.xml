@@ -17,6 +17,8 @@
         http://www.springframework.org/schema/aop
 		http://www.springframework.org/schema/aop/spring-aop.xsd">
 
+    <context:property-placeholder location="classpath:application.properties"/>
+
     <context:component-scan base-package="by.g00dc4t.spring.library"/>
 
     <mvc:annotation-driven/>
@@ -25,28 +27,27 @@
 
     <bean id="templateResolver"
           class="org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver">
-        <property name="prefix" value="/WEB-INF/templates/" />
-        <property name="suffix" value=".html" />
-        <property name="templateMode" value="HTML5" />
-        <property name="cacheable" value="false" />
+        <property name="prefix" value="/WEB-INF/templates/"/>
+        <property name="suffix" value=".html"/>
+        <property name="templateMode" value="HTML5"/>
+        <property name="cacheable" value="false"/>
     </bean>
 
     <bean id="templateEngine"
           class="org.thymeleaf.spring5.SpringTemplateEngine">
-        <property name="templateResolver" ref="templateResolver" />
+        <property name="templateResolver" ref="templateResolver"/>
     </bean>
 
     <bean class="org.thymeleaf.spring5.view.ThymeleafViewResolver">
-        <property name="templateEngine" ref="templateEngine" />
+        <property name="templateEngine" ref="templateEngine"/>
     </bean>
 
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
           destroy-method="close">
         <property name="driverClass" value="com.mysql.cj.jdbc.Driver"/>
-        <property name="jdbcUrl"
-                  value="jdbc:mysql://localhost:3306/my_db?useSSL=false&amp;serverTimezone=UTC"/>
-        <property name="user" value="bestuser"/>
-        <property name="password" value="bestuser"/>
+        <property name="jdbcUrl" value="${db.url}"/>
+        <property name="user" value="${db.user}"/>
+        <property name="password" value="${db.pass}"/>
     </bean>
 
     <bean id="sessionFactory"
