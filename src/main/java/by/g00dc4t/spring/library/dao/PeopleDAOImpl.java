@@ -7,21 +7,25 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class PeopleDAOImpl extends LibraryGenericDAO<Person> {
+    private static final String FROM_QUERY = "from Person";
+    private static final String DELETE_FROM_QUERY = "delete from Person where id =:peopleId";
+    private static final String DELETE_PARAM = "peopleId";
+
     @Override
     protected Query<Person> getQueryGetAll() {
-        return sessionFactory.getCurrentSession().createQuery("from Person", Person.class);
+        return sessionFactory.getCurrentSession().createQuery(FROM_QUERY, Person.class);
     }
 
     @Override
     protected Query<Person> getQueryDelete() {
         Session session = sessionFactory.getCurrentSession();
-        Query<Person> query = session.createQuery("delete from Person where id =:peopleId");
+        Query<Person> query = session.createQuery(DELETE_FROM_QUERY);
         return query;
     }
 
     @Override
     protected String getDeleteParam() {
-        return "peopleId";
+        return DELETE_PARAM;
     }
 
     @Override

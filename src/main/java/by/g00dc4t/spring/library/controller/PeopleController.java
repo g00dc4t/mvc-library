@@ -12,55 +12,62 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 
-
 @Controller
 @RequestMapping("/people")
 public class PeopleController {
+    private static final String ALL_PEOPLE_URL = "people/all-people";
+    private static final String PERSON_INFO_URL = "people/person-info";
+    private static final String PERSON_VIEW_URL = "people/person-view";
+    private static final String REDIRECT_TO_PEOPLE_URL = "redirect:/people";
+    private static final String PEOPLE_NAME = "people";
+    private static final String PERSON_NAME = "person";
+    private static final String ID_NAME = "id";
+
     @Autowired
     private PersonService peopleService;
 
     @RequestMapping("")
     public String showAllPeople(Model model) {
-        model.addAttribute("people", peopleService.getAllPersons());
-        return "people/all-people";
+        model.addAttribute(PEOPLE_NAME, peopleService.getAllPersons());
+        return ALL_PEOPLE_URL;
     }
 
     @RequestMapping("/new")
     public String addNewPeople(Model model) {
-        model.addAttribute("person", new Person());
-        return "people/person-info";
+        model.addAttribute(PERSON_NAME, new Person());
+        return PERSON_INFO_URL;
     }
 
     @RequestMapping("/save")
-    public String savePeople(@Valid @ModelAttribute("person") Person person,
+    public String savePeople(@Valid @ModelAttribute(PERSON_NAME) Person person,
                              BindingResult bindingResult) {
         String result;
         if (bindingResult.hasErrors()) {
-            result = "people/person-info";
+            result = PERSON_INFO_URL;
         } else {
             peopleService.savePerson(person);
-            result = "redirect:/people";
+            result = REDIRECT_TO_PEOPLE_URL;
         }
         return result;
     }
 
     @RequestMapping("/{id}")
-    public String showPeople(@PathVariable("id") int id, Model model) {
+    public String showPeople(@PathVariable(ID_NAME) int id, Model model) {
         Person people = peopleService.getPerson(id);
-        model.addAttribute("people", people);
-        return "people/person-view";
+        model.addAttribute(PEOPLE_NAME, people);
+        return PERSON_VIEW_URL;
     }
 
     @RequestMapping("/{id}/edit")
-    public String updatePeople(@PathVariable("id") int id, Model model) {
+    public String updatePeople(@PathVariable(ID_NAME) int id, Model model) {
         Person person = peopleService.getPerson(id);
-        model.addAttribute("person", person);
-        return "people/person-info";
+        model.addAttribute(PERSON_NAME, person);
+        return PERSON_INFO_URL;
     }
 
     @RequestMapping("/{id}/delete")
-    public String deletePeople(@PathVariable("id") int id) {
+    public String deletePeople(@PathVariable(ID_NAME) int id) {
         peopleService.deletePerson(id);
-        return "redirect:/people";
+        return REDIRECT_TO_PEOPLE_URL;
     }
 }
