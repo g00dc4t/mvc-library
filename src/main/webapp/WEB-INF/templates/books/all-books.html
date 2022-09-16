@@ -5,14 +5,22 @@
 </head>
 <body>
 <h4>Books</h4>
-<table>
-    <tr th:each="book: ${books}">
-        <a th:href="@{/books/{id}(id=${book.id})}">
-            [[${book.name}]], [[${book.author}]], [[${book.year}]]</a>
-        <br>
-    </tr>
-</table>
-<br>
+
+<th:block th:if="${books.size > 0}">
+    <table>
+        <tr th:each="book: ${books}">
+            <a th:href="@{/books/{id}(id=${book.id})}">
+                [[${book.name}]], [[${book.author}]], [[${book.year}]]</a>
+            <br>
+        </tr>
+    </table>
+    <br>
+</th:block>
+
+<th:block th:if="${books.size == 0}">
+    <p>There are no books yet</p>
+</th:block>
+
 <input type="button" value="Add"
        onclick="window.location.href='books/new'"/>
 <br>

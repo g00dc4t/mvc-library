@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Aspect
 public class LoggingDAOAspect {
-    private final Logger logger = LogManager.getLogger(LoggingDAOAspect.class.getName());
+    private final Logger logger = LogManager.getLogger(LoggingDAOAspect.class);
     private static final String BEGIN = "Begin of ";
     private static final String END = "End of ";
 
