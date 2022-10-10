@@ -1,10 +1,8 @@
-CREATE USER 'bestuser'@'localhost' IDENTIFIED BY 'bestuser';
-GRANT ALL PRIVILEGES ON * . * TO 'bestuser'@'localhost';
+--liquibase formatted sql
 
-CREATE SCHEMA my_db;
-
+--changeset g00dc4t:1
 USE my_db;
-CREATE TABLE people
+CREATE TABLE IF NOT EXISTS people
 (
     id      int auto_increment
         primary key,
@@ -13,7 +11,11 @@ CREATE TABLE people
     year    int         null
 )
     engine = InnoDB;
-CREATE TABLE books
+--rollback DROP TABLE people;
+
+--changeset g00dc4t:2
+
+CREATE TABLE IF NOT EXISTS books
 (
     id        int auto_increment
         primary key,
@@ -26,3 +28,4 @@ CREATE TABLE books
             on delete set null
 )
     engine = InnoDB;
+--rollback DROP TABLE books;
