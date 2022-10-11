@@ -6,6 +6,10 @@
     <artifactId>book-library</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+    </properties>
     <name>book-library Maven Webapp</name>
     <url>http://maven.apache.org</url>
     <dependencies>
