@@ -3,14 +3,17 @@ package by.g00dc4t.spring.library.dao;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 import java.util.Optional;
 
 public abstract class LibraryGenericDAO<T> {
-    @Autowired
+
     protected SessionFactory sessionFactory;
+
+    public LibraryGenericDAO(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 
     protected abstract Query<T> getQueryGetAll();
 

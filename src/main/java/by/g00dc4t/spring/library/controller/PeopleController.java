@@ -2,7 +2,6 @@ package by.g00dc4t.spring.library.controller;
 
 import by.g00dc4t.spring.library.entity.Person;
 import by.g00dc4t.spring.library.service.PersonService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,8 +22,11 @@ public class PeopleController {
     private static final String PERSON_NAME = "person";
     private static final String ID_NAME = "id";
 
-    @Autowired
-    private PersonService peopleService;
+    private final PersonService peopleService;
+
+    public PeopleController(PersonService peopleService) {
+        this.peopleService = peopleService;
+    }
 
     @RequestMapping("")
     public String showAllPeople(Model model) {

@@ -2,7 +2,6 @@ package by.g00dc4t.spring.library.service;
 
 import by.g00dc4t.spring.library.dao.LibraryGenericDAO;
 import by.g00dc4t.spring.library.entity.Person;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,8 +10,11 @@ import java.util.Optional;
 
 @Service
 public class PersonServiceImpl implements PersonService {
-    @Autowired
-    private LibraryGenericDAO<Person> personDAO;
+    private final LibraryGenericDAO<Person> personDAO;
+
+    public PersonServiceImpl(LibraryGenericDAO<Person> personDAO) {
+        this.personDAO = personDAO;
+    }
 
     @Transactional
     public List<Person> getAllPersons() {

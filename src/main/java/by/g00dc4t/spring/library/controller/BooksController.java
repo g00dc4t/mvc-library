@@ -27,10 +27,13 @@ public class BooksController {
     private static final String PERSON_NAME = "person";
     private static final String ID_NAME = "id";
 
-    @Autowired
-    private BooksService booksService;
-    @Autowired
-    private PersonService peopleService;
+    private final BooksService booksService;
+    private final PersonService peopleService;
+
+    public BooksController(BooksService booksService, PersonService peopleService) {
+        this.booksService = booksService;
+        this.peopleService = peopleService;
+    }
 
     @RequestMapping("")
     public String showAllBooks(Model model) {
